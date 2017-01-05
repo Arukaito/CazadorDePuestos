@@ -3,6 +3,14 @@ import os
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import sys
+import ctypes  
+
+
+
+def Mbox(title, text, style):
+    ctypes.windll.user32.MessageBoxW(0, text, title, style)
+
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -11,7 +19,7 @@ driver = webdriver.Firefox(firefox_binary=binary)
 
 
 #Control de Silencio
-#driver.set_window_size(100,100)
+driver.set_window_size(100,100)
 
 #Urls a scrapear
 
@@ -40,12 +48,14 @@ driver.find_element_by_xpath('//*[@id="fj"]')
 driver.find_element_by_xpath('//*[@id="fj"]').click()
 driver.switch_to_default_content()
 ScrapList = driver.find_elements_by_xpath("//*[@href]")
-ScrapDes = driver.find_elements_by_xpath('//*[@id="pj_ab6bf32b81f98bdc"]/x:table/x:tbody/x:tr/x:td/x:span')
-
+#-----TODO ------
+#Agregar la descripcion en el scraping
+#ScrapDes = driver.find_element_by_class_name('snip')
+Mbox('Scraped', 'Exito!', 1)
 
 
 with open('C:\\Users\\LDELAROSA\\Documents\\Python\\Scrape\\ScrapedList.txt', "a") as f:
-    for el in ScrapList:                 
-       f.write(el.text+"\n")
+    for el,la in zip(ScrapList,ScrapDes):                 
+       f.write(el.text+la.text)
 
 time.sleep(5)

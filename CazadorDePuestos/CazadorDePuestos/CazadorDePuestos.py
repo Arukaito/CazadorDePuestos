@@ -5,14 +5,14 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import sys
 import ctypes  
 
-
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def Mbox(title, text, style):
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 
 binary = FirefoxBinary(r'C:\Program Files (x86)\Mozilla Firefox\firefox.exe')
 driver = webdriver.Firefox(firefox_binary=binary)
@@ -49,13 +49,14 @@ driver.find_element_by_xpath('//*[@id="fj"]').click()
 driver.switch_to_default_content()
 ScrapList = driver.find_elements_by_xpath("//*[@href]")
 #-----TODO ------
-#Agregar la descripcion en el scraping
-#ScrapDes = driver.find_element_by_class_name('snip')
-Mbox('Scraped', 'Exito!', 1)
+#Agregar la descripcion en el scraping 
+ScrapDes = driver.find_elements_by_xpath("//*[@href]")
+Mbox('Scraped', 'Correcto', 0)
 
 
 with open('C:\\Users\\LDELAROSA\\Documents\\Python\\Scrape\\ScrapedList.txt', "a") as f:
-    for el,la in zip(ScrapList,ScrapDes):                 
-       f.write(el.text+la.text)
+    for el in ScrapList:                 
+       f.write(el.text+"\n")
 
 time.sleep(5)
+driver.quit()

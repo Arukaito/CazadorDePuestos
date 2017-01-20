@@ -18,6 +18,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Core;
 using System.Reflection;
 using Outlook = Microsoft.Office.Interop.Outlook;
+
 namespace DailyTask
 {
     public partial class Form1 : Form
@@ -28,7 +29,6 @@ namespace DailyTask
 
             //progressbar propiedades de 3 steps
             progressBar1.Maximum = 3;
-
         }
 
         private void ExcelMacro(string ExcelFile, string MacroFileLocation, string Macro)
@@ -51,7 +51,10 @@ namespace DailyTask
                     try
                     {
                         xlApp.DisplayAlerts = false;
-                        xlWbk.SaveAs(@"\\ramfile01\LGroups\PC&L\CONTROL DE PRODUCCION\REPORTES\45 Exception Reports\F45 Exception Report " + date ,Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                        xlWbk.SaveAs(
+                            @"\\ramfile01\LGroups\PC&L\CONTROL DE PRODUCCION\REPORTES\45 Exception Reports\F45 Exception Report " +
+                            date, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue,
+                            Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                         xlWbk.Close(true);
                     }
                     catch
@@ -90,7 +93,10 @@ namespace DailyTask
                     try
                     {
                         xlApp.DisplayAlerts = false;
-                        xlWbk.SaveAs(@"\\\RAMFILE01\LGroups\PC&L\CONTROL DE PRODUCCION\ABR\866 Summary Report\866 summary report " + fc, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                        xlWbk.SaveAs(
+                            @"\\\RAMFILE01\LGroups\PC&L\CONTROL DE PRODUCCION\ABR\866 Summary Report\866 summary report " +
+                            fc, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue,
+                            Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                         xlWbk.Close(true);
                     }
                     catch
@@ -113,7 +119,7 @@ namespace DailyTask
             string date = monthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string fc = monthCalendar1.SelectionRange.Start.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture);
             string shortDate = monthCalendar1.SelectionRange.Start.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
-            int dayOfWeek = (int)System.DateTime.Now.DayOfWeek;
+            int dayOfWeek = (int) System.DateTime.Now.DayOfWeek;
             int dayOfWeekplus = dayOfWeek + 1;
 
             //ignoren este espageti 
@@ -127,23 +133,20 @@ namespace DailyTask
             string[] files = System.IO.Directory.GetFiles(sourcePath, pattern);
             for (int i = 0; i < files.Length; i++)
             {
-                    estaOkimg866.Visible = true; //866
-                
-                    estaOkimgPic.Visible = true; //PIC
+                estaOkimg866.Visible = true; //866
 
+                estaOkimgPic.Visible = true; //PIC
             }
             string[] filesTrucks = System.IO.Directory.GetFiles(sourcePathTrucks, fileNameTrucks);
             for (int i = 0; i < filesTrucks.Length; i++)
             {
-                    estaOkimgNav.Visible = true; //  NAVISTAR TRUCKS
-
+                estaOkimgNav.Visible = true; //  NAVISTAR TRUCKS
             }
-            string[] filesF= System.IO.Directory.GetFiles(sourcePathTrucks, fileNameF);
+            string[] filesF = System.IO.Directory.GetFiles(sourcePathTrucks, fileNameF);
             for (int i = 0; i < filesF.Length; i++)
             {
-                    estaOkimgF.Visible = true; // F45
+                estaOkimgF.Visible = true; // F45
             }
-
         }
 
         private void OchoSeis() //prepara el archivo de la 866
@@ -153,7 +156,7 @@ namespace DailyTask
             string date = monthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string fc = monthCalendar1.SelectionRange.Start.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture);
             string shortDate = monthCalendar1.SelectionRange.Start.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
-            int dayOfWeek = (int)System.DateTime.Now.DayOfWeek;
+            int dayOfWeek = (int) System.DateTime.Now.DayOfWeek;
             int dayOfWeekplus = dayOfWeek + 1;
             string macroFile = @"\\RAMFILE01\LGroups\PC&L\Software Development\Macros\Macros.xlsb";
             string dummyFile = @"\\RAMFILE01\LGroups\PC&L\Software Development\Macros\Dummy.xlsx";
@@ -179,8 +182,6 @@ namespace DailyTask
                 System.IO.File.Move(targetPath + Path.GetFileName(files[i]), targetPath + "SAL866Out.csv");
             }
 
-          
-
 
             progressBar1.Value += 1;
 
@@ -190,14 +191,12 @@ namespace DailyTask
             progressBar1.Value += 1;
             MessageBox.Show("Generada 866 con exito!");
             progressBar1.Value = 0;
-
-
         }
 
-        private void MoverArchivo()//mueve navistar trucks
+        private void MoverArchivo() //mueve navistar trucks
         {
             //strings de las fechas de los exeption reports
-            string date = monthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd",CultureInfo.InvariantCulture);
+            string date = monthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string fc = monthCalendar1.SelectionRange.Start.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture);
 
 
@@ -223,29 +222,31 @@ namespace DailyTask
             progressBar1.Value += 1;
             // Cambiamos el nombre para quitar el string de la fecha 
 
-            System.IO.File.Move(targetPath + "\\" + "Navistar Truck Jobs (3320) " + date + ".xlsx", targetPath +  "\\" + "Navistar Truck Jobs (3320).xlsx");
+            System.IO.File.Move(targetPath + "\\" + "Navistar Truck Jobs (3320) " + date + ".xlsx",
+                targetPath + "\\" + "Navistar Truck Jobs (3320).xlsx");
 
             // Keep console window open in debug mode.
             MessageBox.Show("Trasladado Correctamente!");
             progressBar1.Value = 0;
         }
 
-        private void PicDb()//mueve pic db
+        private void PicDb() //mueve pic db
         {
             string date = monthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string fc = monthCalendar1.SelectionRange.Start.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture);
             string shortDate = monthCalendar1.SelectionRange.Start.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
-            int dayOfWeek = (int)System.DateTime.Now.DayOfWeek;
+            int dayOfWeek = (int) System.DateTime.Now.DayOfWeek;
             int dayOfWeekplus = dayOfWeek + 1;
 
 
             string sourcePath = @"\\waredi04\reports\ABRSAL";
             string targetPath = @"\\RAMFILE01\LGroups\PC&L\CONTROL DE PRODUCCION\ABR\ARCHIVE 866\";
-            
+
 
             string pattern = "SAL866Out" + dayOfWeekplus + "_" + shortDate + "_" + "*" + ".csv";
             string patternZip = "abrp" + dayOfWeekplus + "_" + "saltillo" + "_" + shortDate + "_" + "*" + ".zip";
-            string patternZip2 = sourcePath + "\\" + "abrp" + dayOfWeekplus + "saltillo" + "_" + shortDate + "_" + "*" + ".zip";
+            string patternZip2 = sourcePath + "\\" + "abrp" + dayOfWeekplus + "saltillo" + "_" + shortDate + "_" + "*" +
+                                 ".zip";
             string patternZipResult = "Saltillo_866_Detail.txt";
 
             //Limpiamos contenido viejo
@@ -275,15 +276,14 @@ namespace DailyTask
                 System.IO.File.Copy(files[i], targetPath + Path.GetFileName(files[i]));
             }
 
-            
+
             //Extraemos el Zip 
             string[] filers = System.IO.Directory.GetFiles(sourcePath, patternZip);
 
-            for(int ai = 0; ai < filers.Length; ai++)
+            for (int ai = 0; ai < filers.Length; ai++)
             {
                 //System.IO.File.Copy(filers[ai], targetPath + Path.GetFileName(filers[ai]));
-                ZipFile.ExtractToDirectory(filers[ai],targetPath);
-                
+                ZipFile.ExtractToDirectory(filers[ai], targetPath);
             }
 
             progressBar1.Value += 1;
@@ -293,7 +293,6 @@ namespace DailyTask
 
             MessageBox.Show("Trasladado Correctamente!");
             progressBar1.Value = 0;
-
         }
 
         private void EfeCuarenta()
@@ -308,11 +307,10 @@ namespace DailyTask
             string macroFile = @"\\RAMFILE01\LGroups\PC&L\Software Development\Macros\Macros.xlsb";
 
             progressBar1.Value += 1;
-            ExcelMacro(sourcePath + "\\" + fileName,macroFile, "FCuarenta");
+            ExcelMacro(sourcePath + "\\" + fileName, macroFile, "FCuarenta");
             progressBar1.Value += 1;
             MessageBox.Show("Generado!");
             progressBar1.Value = 0;
-
         }
 
         private void btn_NavistarTrucks_Click(object sender, EventArgs e)
@@ -322,15 +320,11 @@ namespace DailyTask
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-
         }
 
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -350,12 +344,10 @@ namespace DailyTask
 
         private void btn_watcher_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -365,7 +357,7 @@ namespace DailyTask
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

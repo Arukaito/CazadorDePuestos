@@ -17,7 +17,6 @@ using System.IO.Compression;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Core;
 using System.Reflection;
-using DevComponents.DotNetBar;
 using Outlook = Microsoft.Office.Interop.Outlook;
 namespace DailyTask
 {

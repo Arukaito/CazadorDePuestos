@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DailyTask")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DailyTask - Tareas Diarias De Control De Produccion")]
+[assembly: AssemblyDescription("Un programa para automatizar las tareas diarias de control de produccion")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("DailyTask")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("MSSL Alphabet de Saltillo")]
+[assembly: AssemblyProduct("DailyTask Version 1.0")]
+[assembly: AssemblyCopyright("Copyright © MSSL Alphabet de Saltillo 2017")]
+[assembly: AssemblyTrademark("MSSL Alphabet de Saltillo")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
